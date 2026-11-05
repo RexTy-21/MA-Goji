@@ -1,0 +1,22 @@
+/* Tema hijau - putih */
+:root { --bg:#f2faf5; --fg:#1f2a24; --green:#16a34a; --amber:#16a34a; color-scheme: light; }
+body { background:#f2faf5; color:#1f2a24; margin:0; }
+#app { --paper:#f2faf5; --bar:#ffffff; --line-l:#d6eadc; }
+.side { background: linear-gradient(180deg,#14953f 0%,#0d6b33 55%,#084a24 100%) !important; }
+.side-title { font-size:13px; line-height:1.4; }
+.side-title b { display:block; font-size:15px; margin-bottom:2px; }
+.side-search { background:rgba(255,255,255,.18) !important; border-color:rgba(255,255,255,.4) !important; color:#fff !important; }
+.side-search:focus { border-color:#fff !important; background:rgba(255,255,255,.28) !important; }
+.nav-btn.act { background:rgba(255,255,255,.22) !important; }
+.sub-btn.act { color:#fff !important; background:rgba(255,255,255,.2) !important; font-weight:600; }
+.top { background:#fff !important; border-bottom:1px solid #d6eadc !important; }
+.user-btn .avatar { background:#0f7a3d !important; color:#fff !important; }
+.right_col a:not(.btn) { color:#0f7a3d; }
+.btn-primary { background:#16a34a; border-color:#128a3f; } .btn-primary:hover, .btn-primary:focus { background:#12853d; border-color:#0f7a3d; }
+.btn-success { background:#0f9d58; border-color:#0c8548; }
+.x_panel { border-color:#d6eadc !important; }
+.x_title { border-bottom:2px solid #cfe9d8 !important; }
+table.table thead th, table.dataTable thead th { background:#e8f6ed !important; color:#16452b !important; }
+.pagination > .active > a { background:#16a34a; border-color:#16a34a; }
+.dt-button { background:#fff !important; }
+.well { background:#f2faf5 !important; border-color:#d6eadc !important; }

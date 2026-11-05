@@ -1,0 +1,49 @@
+/* Kompatibilitas halaman asli (Bootstrap 3 + kelas Gentelella) di dalam layout SIMPLE */
+#app .content { background: var(--paper); }
+.right_col { padding: 0 4px 24px; color: #2a3f54; }
+.right_col .page-title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 14px; padding: 0; }
+.right_col .page-title h3 { margin: 0; font-size: 22px; font-weight: 600; color: #1c2438; }
+.right_col .title_left, .right_col .title_right { width: auto; float: none; padding: 0; min-height: 0; }
+.right_col .title_right .form-group { margin: 0; }
+.x_panel { background: #fff; border: 1px solid #dde1e9; border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; position: relative; box-shadow: 0 1px 2px rgba(20,30,60,.04); }
+.x_title { border-bottom: 2px solid #e6e9ed; padding: 0 0 8px; margin-bottom: 10px; }
+.x_title h2 { margin: 0 0 4px; font-size: 17px; font-weight: 600; color: #1c2438; float: left; }
+.x_content { padding: 4px 0; }
+.clearfix::after, .x_title::after { content: ""; display: table; clear: both; }
+.nav-btn i.fa { width: 19px; text-align: center; font-size: 16px; flex: none; }
+#app .nav-btn { font-family: "DM Sans", sans-serif; }
+.btn { border-radius: 6px; }
+.select2-container--default .select2-selection--single { height: 34px; border-color: #ccc; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 32px; }
+.select2-container--default .select2-selection--single .select2-selection__arrow { height: 32px; }
+.right_col .form-control { box-shadow: none; }
+.right_col .well { background: #f7f8fb; border-color: #dde1e9; }
+.userbox .user-menu a { display: block; padding: 8px 10px; color: inherit; text-decoration: none; border-radius: 6px; font-size: 14px; }
+.userbox .user-menu a:hover { background: #eef1f6; }
+.login-error { min-height: 18px; }
+body{margin:0}
+
+/* ---- perbaikan: kontrol form jadi terang + ukuran lebih kecil ---- */
+:root { color-scheme: light; }
+body { font-size: 13px; }
+#app { font-size: 13px; }
+#app .side { width: 235px; }
+.right_col input, .right_col select, .right_col textarea,
+.dataTables_wrapper select, .dataTables_wrapper input {
+  background: #fff; color: #333; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;
+}
+.right_col select option { background: #fff; color: #333; }
+.right_col input[type=checkbox], .right_col input[type=radio] { background: none; }
+.dataTables_wrapper select { padding: 2px 4px; height: 28px; }
+.dataTables_wrapper input { padding: 2px 8px; height: 28px; margin-left: 4px; }
+.dataTables_wrapper, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate { color: #444; font-size: 12.5px; }
+table.dataTable thead th, table.table thead th { color: #1c2438; background: #fff; }
+table.dataTable tbody td, table.table tbody td { color: #2a3f54; }
+.select2-container, .select2-dropdown, .select2-results__option { color: #333; font-size: 13px; }
+.select2-dropdown { background: #fff; }
+.right_col .page-title h3 { font-size: 19px; }
+.right_col .page-title h3 small { font-size: 12px; }
+.right_col .btn { font-size: 13px; }
+.x_title h2 { font-size: 15px; }
+.panel .k-label { font-size: 16px; }
+.panel .card-head h3 { font-size: 17px; }
