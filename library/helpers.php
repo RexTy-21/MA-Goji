@@ -25,3 +25,12 @@ function bulanList() { return [1=>'Januari','Februari','Maret','April','Mei','Ju
 
 function taAktif($db) { return qone($db, "SELECT * FROM tahun_ajaran WHERE aktif = 1 ORDER BY id DESC LIMIT 1"); }
 function hariList() { return [1=>'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu']; }
+function namaUser() { return $_SESSION['SES_NAMA'] ?? ($_SESSION['SES_USER_NAME'] ?? 'user'); }
+function nilaiAkhir($t, $u, $a) {
+    if ($t === null || $t === '' || $u === null || $u === '' || $a === null || $a === '') return null;
+    return round($t * 0.3 + $u * 0.3 + $a * 0.4, 1);
+}
+function predikat($n) {
+    if ($n === null) return '-';
+    return $n >= 90 ? 'A' : ($n >= 80 ? 'B' : ($n >= 70 ? 'C' : 'D'));
+}

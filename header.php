@@ -9,11 +9,12 @@ $__nama = $_SESSION['SES_NAMA'] ?? 'User';
 $__ket = $_SESSION['SES_ROLE'] ?? '';
 $__menu = [
   ['Profil Madrasah', 'fa-university', 'Dashboard', null],
-  ['Akademik', 'fa-graduation-cap', null, [['Data Siswa', 'Data-Siswa'], ['Data Guru', 'Data-Guru'], ['Data Kelas', 'Data-Kelas']]],
+  ['Akademik', 'fa-graduation-cap', null, [['Data Siswa', 'Data-Siswa'], ['Data Guru', 'Data-Guru'], ['Data Kelas', 'Data-Kelas'], ['Mata Pelajaran', 'Mata-Pelajaran'], ['Jadwal Pelajaran', 'Jadwal'], ['Tahun Ajaran', 'Tahun-Ajaran'], ['Kenaikan Kelas', 'Kenaikan-Kelas']]],
+  ['Penilaian', 'fa-pencil-square-o', null, [['Input Nilai', 'Input-Nilai'], ['Rapor', 'Rapor']]],
   ['Absensi', 'fa-qrcode', null, [['Scan Absen', 'Absen-Scan'], ['Absensi Siswa', 'Absen-Siswa'], ['Absensi Guru', 'Absen-Guru']]],
+  ['Layanan', 'fa-bullhorn', null, [['Perizinan', 'Perizinan'], ['Pengumuman', 'Pengumuman']]],
   ['Upload File', 'fa-upload', 'Upload-File', null],
   ['Kelola User', 'fa-cog', 'Users', null],
-  ['Akademik', 'fa-graduation-cap', null, [['Data Siswa', 'Data-Siswa'], ['Data Guru', 'Data-Guru'], ['Data Kelas', 'Data-Kelas'], ['Mata Pelajaran', 'Mata-Pelajaran'], ['Jadwal Pelajaran', 'Jadwal'], ['Tahun Ajaran', 'Tahun-Ajaran']]],
 ];
 $__menu = array_values(array_filter(array_map(function ($m) {
   if ($m[3]) {

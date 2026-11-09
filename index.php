@@ -25,6 +25,12 @@ $routes = [
     'Tahun-Ajaran' => 'pages/tahun_ajaran.php',
     'Mata-Pelajaran' => 'pages/mapel.php',
     'Jadwal' => 'pages/jadwal.php',
+    'Perizinan' => 'pages/perizinan.php',
+    'Pengumuman' => 'pages/pengumuman.php',
+    'Kenaikan-Kelas' => 'pages/kenaikan.php',
+    'Input-Nilai' => 'pages/nilai.php',
+    'Rapor' => 'pages/rapor.php',
+    'Cetak-Rapor' => 'pages/cetak_rapor.php',
 ];
 $page = $_GET['page'] ?? 'Dashboard';
 
