@@ -7,6 +7,7 @@ function accessRules() {
         'Absen-Guru' => mgmtRoles(),
         'Absen-Scan' => ['ADMIN', 'TATA USAHA', 'WAKIL KEPALA', 'GURU'],
         'Users'      => ['ADMIN'],
+        'Tahun-Ajaran' => mgmtRoles(),
     ];
 }
 function canAccess($page) {

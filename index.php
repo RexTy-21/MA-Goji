@@ -3,22 +3,28 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/library/helpers.php';
 require_once __DIR__ . '/library/access.php';
-if (empty($_SESSION['SES_LOGIN'])) { header('Location: login.php'); exit; }
+if (empty($_SESSION['SES_LOGIN'])) {
+    header('Location: login.php');
+    exit;
+}
 
 $routes = [
- 'Dashboard'   => 'pages/home.php',
- 'Data-Siswa'  => 'pages/siswa.php',
- 'Data-Guru'   => 'pages/guru.php',
- 'Data-Kelas'  => 'pages/kelas.php',
- 'Absen-Scan'  => 'pages/absen_scan.php',
- 'Absen-Siswa' => 'pages/absen_siswa.php',
- 'Absen-Guru'  => 'pages/absen_guru.php',
- 'Cetak-Kartu' => 'pages/kartu.php',
- 'Profile'     => 'pages/profile.php',
- 'User-Guide'  => 'pages/help.php',
- 'Help'        => 'pages/help.php',
- 'Users'       => 'pages/users.php',
- 'Upload-File' => 'pages/upload_file.php',
+    'Dashboard' => 'pages/home.php',
+    'Data-Siswa' => 'pages/siswa.php',
+    'Data-Guru' => 'pages/guru.php',
+    'Data-Kelas' => 'pages/kelas.php',
+    'Absen-Scan' => 'pages/absen_scan.php',
+    'Absen-Siswa' => 'pages/absen_siswa.php',
+    'Absen-Guru' => 'pages/absen_guru.php',
+    'Cetak-Kartu' => 'pages/kartu.php',
+    'Profile' => 'pages/profile.php',
+    'User-Guide' => 'pages/help.php',
+    'Help' => 'pages/help.php',
+    'Users' => 'pages/users.php',
+    'Upload-File' => 'pages/upload_file.php',
+    'Tahun-Ajaran' => 'pages/tahun_ajaran.php',
+    'Mata-Pelajaran' => 'pages/mapel.php',
+    'Jadwal' => 'pages/jadwal.php',
 ];
 $page = $_GET['page'] ?? 'Dashboard';
 
@@ -27,9 +33,13 @@ if ($page === 'Revert') {   // kembali dari "masuk sebagai user lain"
         $backup = $_SESSION['MASTER_LOGIN_SES'];
         $_SESSION = $backup;
     }
-    header('Location: ?page=Users'); exit;
+    header('Location: ?page=Users');
+    exit;
 }
-if (!isset($routes[$page])) { http_response_code(404); $page = 'Dashboard'; }
+if (!isset($routes[$page])) {
+    http_response_code(404);
+    $page = 'Dashboard';
+}
 if (!canAccess($page)) {
     http_response_code(403);
     include 'header.php';
