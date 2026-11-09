@@ -12,6 +12,8 @@ $__menu = [
   ['Akademik', 'fa-graduation-cap', null, [['Data Siswa', 'Data-Siswa'], ['Data Guru', 'Data-Guru'], ['Data Kelas', 'Data-Kelas'], ['Mata Pelajaran', 'Mata-Pelajaran'], ['Jadwal Pelajaran', 'Jadwal'], ['Tahun Ajaran', 'Tahun-Ajaran'], ['Kenaikan Kelas', 'Kenaikan-Kelas']]],
   ['Penilaian', 'fa-pencil-square-o', null, [['Input Nilai', 'Input-Nilai'], ['Rapor', 'Rapor']]],
   ['Absensi', 'fa-qrcode', null, [['Scan Absen', 'Absen-Scan'], ['Absensi Siswa', 'Absen-Siswa'], ['Absensi Guru', 'Absen-Guru']]],
+  ['Kesiswaan', 'fa-shield', null, [['Pelanggaran Siswa', 'Pelanggaran']]],
+  ['Inventaris', 'fa-archive', 'Inventaris', null],
   ['Layanan', 'fa-bullhorn', null, [['Perizinan', 'Perizinan'], ['Pengumuman', 'Pengumuman']]],
   ['Laporan', 'fa-bar-chart', 'Laporan', null],
   ['Upload File', 'fa-upload', 'Upload-File', null],

@@ -32,6 +32,8 @@ $routes = [
     'Rapor' => 'pages/rapor.php',
     'Cetak-Rapor' => 'pages/cetak_rapor.php',
     'Laporan' => 'pages/laporan.php',
+    'Pelanggaran' => 'pages/pelanggaran.php',
+    'Inventaris' => 'pages/inventaris.php',
 ];
 $page = $_GET['page'] ?? 'Dashboard';
 
