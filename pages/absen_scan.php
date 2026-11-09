@@ -2,6 +2,19 @@
 // Scan QR absensi untuk SISWA dan GURU. QR berisi "SISWA:<nis>" atau "GURU:<nip>".
 $db = $koneksidb;
 $BATAS = '07:00:00';   // masuk setelah jam ini = Terlambat
+$TOLERANSI_MENIT = 15; // siswa yang masuk lebih dari ini setelah $BATAS otomatis dikurangi poin kedisiplinannya
+$NAMA_JENIS_OTOMATIS = 'Terlambat lebih dari 15 menit';   // harus ada di tabel jenis_pelanggaran (lihat SQL)
+
+function potongPoinTerlambat($db, $siswaId, $jam, $batas, $menit, $namaJenis) {
+    if ($jam <= date('H:i:s', strtotime($batas) + $menit * 60)) return 0;
+    $j = qone($db, "SELECT id, poin FROM jenis_pelanggaran WHERE nama = ? LIMIT 1", 's', [$namaJenis]);
+    if (!$j) return 0;
+    $tgl = date('Y-m-d');
+    if (qone($db, "SELECT id FROM pelanggaran_siswa WHERE siswa_id = ? AND jenis_id = ? AND tanggal = ?", 'iis', [$siswaId, $j['id'], $tgl])) return 0;   // sekali per hari
+    qrun($db, "INSERT INTO pelanggaran_siswa (siswa_id, jenis_id, tanggal, poin, keterangan, dicatat_oleh, dibuat) VALUES (?,?,?,?,?,?,NOW())",
+         'iisiss', [$siswaId, $j['id'], $tgl, (int)$j['poin'], 'Otomatis: scan masuk pukul ' . substr($jam, 0, 5), 'Sistem']);
+    return (int)$j['poin'];
+}
 
 function catat($db, $tbl, $fk, $id, $batas) {
     $tgl = date('Y-m-d'); $jam = date('H:i:s');
@@ -35,6 +48,10 @@ if (isset($_GET['ajax'])) {
         if ($s['status'] !== 'Active') { echo json_encode(['ok' => false, 'msg' => $s['nama'] . ' berstatus ' . $s['status'] . '.']); exit; }
         $r = catat($db, 'absensi_siswa', 'siswa_id', (int)$s['id'], $BATAS);
         $nama = $s['nama']; $ket = 'Siswa - Kelas ' . $s['kelas'];
+        if ($r && $r['tipe'] === 'MASUK') {
+            $potong = potongPoinTerlambat($db, (int)$s['id'], date('H:i:s'), $BATAS, $TOLERANSI_MENIT, $NAMA_JENIS_OTOMATIS);
+            if ($potong) $ket .= ' | Poin disiplin -' . $potong . ' (terlambat > ' . $TOLERANSI_MENIT . ' menit)';
+        }
     } else {
         if ($g['status'] !== 'Active') { echo json_encode(['ok' => false, 'msg' => $g['nama'] . ' berstatus NonActive.']); exit; }
         $r = catat($db, 'absensi_guru', 'guru_id', (int)$g['id'], $BATAS);
