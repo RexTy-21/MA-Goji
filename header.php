@@ -13,6 +13,7 @@ $__menu = [
   ['Penilaian', 'fa-pencil-square-o', null, [['Input Nilai', 'Input-Nilai'], ['Rapor', 'Rapor']]],
   ['Absensi', 'fa-qrcode', null, [['Scan Absen', 'Absen-Scan'], ['Absensi Siswa', 'Absen-Siswa'], ['Absensi Guru', 'Absen-Guru']]],
   ['Layanan', 'fa-bullhorn', null, [['Perizinan', 'Perizinan'], ['Pengumuman', 'Pengumuman']]],
+  ['Laporan', 'fa-bar-chart', 'Laporan', null],
   ['Upload File', 'fa-upload', 'Upload-File', null],
   ['Kelola User', 'fa-cog', 'Users', null],
 ];
