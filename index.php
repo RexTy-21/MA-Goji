@@ -34,6 +34,7 @@ $routes = [
     'Laporan' => 'pages/laporan.php',
     'Pelanggaran' => 'pages/pelanggaran.php',
     'Inventaris' => 'pages/inventaris.php',
+    'Master-Menu' => 'pages/master_menu.php',
 ];
 $page = $_GET['page'] ?? 'Dashboard';
 

@@ -7,18 +7,7 @@ $__alias = ['Cetak-Kartu' => 'Data-Siswa'];
 $__page = $__alias[$__page] ?? $__page;
 $__nama = $_SESSION['SES_NAMA'] ?? 'User';
 $__ket = $_SESSION['SES_ROLE'] ?? '';
-$__menu = [
-  ['Profil Madrasah', 'fa-university', 'Dashboard', null],
-  ['Akademik', 'fa-graduation-cap', null, [['Data Siswa', 'Data-Siswa'], ['Data Guru', 'Data-Guru'], ['Data Kelas', 'Data-Kelas'], ['Mata Pelajaran', 'Mata-Pelajaran'], ['Jadwal Pelajaran', 'Jadwal'], ['Tahun Ajaran', 'Tahun-Ajaran'], ['Kenaikan Kelas', 'Kenaikan-Kelas']]],
-  ['Penilaian', 'fa-pencil-square-o', null, [['Input Nilai', 'Input-Nilai'], ['Rapor', 'Rapor']]],
-  ['Absensi', 'fa-qrcode', null, [['Scan Absen', 'Absen-Scan'], ['Absensi Siswa', 'Absen-Siswa'], ['Absensi Guru', 'Absen-Guru']]],
-  ['Kesiswaan', 'fa-shield', null, [['Pelanggaran Siswa', 'Pelanggaran']]],
-  ['Inventaris', 'fa-archive', 'Inventaris', null],
-  ['Layanan', 'fa-bullhorn', null, [['Perizinan', 'Perizinan'], ['Pengumuman', 'Pengumuman']]],
-  ['Laporan', 'fa-bar-chart', 'Laporan', null],
-  ['Upload File', 'fa-upload', 'Upload-File', null],
-  ['Kelola User', 'fa-cog', 'Users', null],
-];
+$__menu = menuRegistry();   // daftar menu ada di library/access.php
 $__menu = array_values(array_filter(array_map(function ($m) {
   if ($m[3]) {
     $m[3] = array_values(array_filter($m[3], fn($k) => canAccess($k[1])));
