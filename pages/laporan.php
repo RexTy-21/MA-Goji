@@ -69,11 +69,21 @@ if ($out === 'xls' && $H) {
 if ($out === 'print' && $H) {
     $kepala = qone($db, "SELECT user_fullname FROM master_user WHERE user_role = 'KEPALA MADRASAH' AND user_status = 1 ORDER BY user_id LIMIT 1");
     ?><!doctype html><html lang="id"><head><meta charset="utf-8"><title><?= e($judul) ?></title>
-<style>@page{size:A4 landscape;margin:12mm} body{font-family:Arial,sans-serif;font-size:12px;margin:18px} .kop{display:flex;align-items:center;gap:12px;border-bottom:3px double #166534;padding-bottom:6px;margin-bottom:8px}.kop img{height:54px}.kop h2{margin:0;color:#166534;font-size:17px}
-table{width:100%;border-collapse:collapse} th,td{border:1px solid #333;padding:4px 6px} th{background:#dcf3e3} .ttd{margin-top:26px;float:right;text-align:center;width:240px} .bar{margin-bottom:10px} @media print{.bar{display:none}}</style></head><body>
+<style>
+  @page{size:A4 landscape;margin:12mm}
+  body{position:relative;font-family:Arial,sans-serif;font-size:12px;margin:18px}
+  .watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;max-width:70%;opacity:0.07;pointer-events:none;z-index:0;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .kop{display:flex;align-items:center;gap:12px;border-bottom:3px double #166534;padding-bottom:6px;margin-bottom:8px;position:relative;z-index:1}
+  .kop img{height:54px}.kop h2{margin:0;color:#166534;font-size:17px}
+  table{width:100%;border-collapse:collapse;position:relative;z-index:1} th,td{border:1px solid #333;padding:4px 6px} th{background:#dcf3e3}
+  .ttd{margin-top:26px;float:right;text-align:center;width:240px;position:relative;z-index:1}
+  .bar{margin-bottom:10px}
+  @media print{.bar{display:none} .watermark{opacity:0.07!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+</style></head><body>
 <div class="bar"><button onclick="window.print()">Cetak / Simpan PDF</button></div>
+<img class="watermark" src="assets/img/logo.png" alt="Watermark MA Ghoyatul Jihad">
 <div class="kop"><img src="assets/img/logo.png" alt=""><div><h2>MA GHOYATUL JIHAD KARAWANG</h2><div>Sistem Informasi Madrasah Pintar, Lengkap, dan Efektif</div></div></div>
-<h3 style="text-align:center;margin:6px 0"><?= e(strtoupper($judul)) ?></h3><p style="text-align:center;margin:0 0 10px"><?= e($sub) ?></p>
+<h3 style="text-align:center;margin:6px 0;position:relative;z-index:1"><?= e(strtoupper($judul)) ?></h3><p style="text-align:center;margin:0 0 10px;position:relative;z-index:1"><?= e($sub) ?></p>
 <?= $tbl(true) ?>
 <div class="ttd">Karawang, <?= date('d') . ' ' . bulanList()[(int)date('n')] . ' ' . date('Y') ?><br>Kepala Madrasah<br><br><br><br><u><?= e($kepala['user_fullname'] ?? '........................') ?></u></div>
 </body></html><?php exit;
