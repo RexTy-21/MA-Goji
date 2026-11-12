@@ -159,14 +159,9 @@ Buka antarmuka database Anda (misalnya **phpMyAdmin** di `http://localhost/phpmy
 
 1. Buat database baru bernama **`goji_db`** (atau sesuaikan dengan konfigurasi Anda).
 2. Jalankan/import skrip SQL berikut secara berurutan:
-   * 📄 `database/schema.sql` *(Struktur tabel utama)*
+   * 📄 `database/schema.sql` *(Database utama)*
    * 📄 `database/seed.sql` *(Data master awal, siswa, guru, kelas, & akun demo)*
-   * 📄 `database/update_tahap1.sql` *(Modul Tahun Ajaran, Mapel, dan Jadwal)*
-   * 📄 `database/update_tahap2.sql` *(Modul Perizinan dan Pengumuman)*
-   * 📄 `database/update_tahap3.sql` *(Modul Nilai dan E-Rapor)*
-   * 📄 `database/update_tahap4.sql` *(Modul Pelanggaran Kesiswaan dan Inventaris)*
-   * 📄 `database/update_master_menu.sql` *(Struktur hak akses Master Menu)*
-   * 📄 `database/update_poin_otomatis.sql` *(Aturan otomatis poin keterlambatan)*
+
 
 > **Tips:** Jika menggunakan database bernama `goji_db`, saat mengimpor `schema.sql` dan `seed.sql`, pastikan Anda mengimpor langsung ke database `goji_db` atau sesuaikan baris `USE simple_sekolah;` pada baris atas file tersebut.
 
