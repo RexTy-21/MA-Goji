@@ -202,14 +202,9 @@ ma-goji/
 │       ├── app.js                # Interaktivitas UI, sidebar, datatables, sweetalert
 │       └── card.js               # Handler pratinjau kartu pelajar
 ├── database/
-│   ├── schema.sql                # Skema tabel dasar (user, guru, siswa, kelas, absensi)
-│   ├── seed.sql                  # Data seeder awal (pengguna & sampel siswa/guru)
-│   ├── update_tahap1.sql         # Skema Tahun Ajaran, Mapel, & Jadwal KBM
-│   ├── update_tahap2.sql         # Skema Layanan Perizinan & Pengumuman
-│   ├── update_tahap3.sql         # Skema Input Nilai & Catatan Rapor
-│   ├── update_tahap4.sql         # Skema Poin Pelanggaran & Inventaris Barang
-│   ├── update_master_menu.sql    # Skema Hak Akses Master Menu Dinamis
-│   └── update_poin_otomatis.sql  # Aturan sanksi keterlambatan otomatis
+│   ├── schema.sql                # Skema tabel dasar (database utama)
+│   └── seed.sql                  # Data seeder awal (pengguna & sampel siswa/guru)
+│            
 ├── library/
 │   ├── access.php                # Logic otorisasi peran & pemeriksaan Master Menu
 │   └── helpers.php               # Helper fungsi: sanitasi data, query DB, predikat nilai
