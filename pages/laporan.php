@@ -82,7 +82,7 @@ if ($out === 'print' && $H) {
 </style></head><body>
 <div class="bar"><button onclick="window.print()">Cetak / Simpan PDF</button></div>
 <img class="watermark" src="assets/img/logo.png" alt="Watermark MA Ghoyatul Jihad">
-<div class="kop"><img src="assets/img/logo.png" alt=""><div><h2>MA GHOYATUL JIHAD KARAWANG</h2><div>Sistem Informasi Madrasah Pintar, Lengkap, dan Efektif</div></div></div>
+<div class="kop"><img src="assets/img/logo.png" alt=""><div><h2>MA GHOYATUL JIHAD KARAWANG</h2></div></div>
 <h3 style="text-align:center;margin:6px 0;position:relative;z-index:1"><?= e(strtoupper($judul)) ?></h3><p style="text-align:center;margin:0 0 10px;position:relative;z-index:1"><?= e($sub) ?></p>
 <?= $tbl(true) ?>
 <div class="ttd">Karawang, <?= date('d') . ' ' . bulanList()[(int)date('n')] . ' ' . date('Y') ?><br>Kepala Madrasah<br><br><br><br><u><?= e($kepala['user_fullname'] ?? '........................') ?></u></div>

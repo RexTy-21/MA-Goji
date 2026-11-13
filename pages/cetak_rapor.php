@@ -222,7 +222,6 @@ $tglCetak = date('d') . ' ' . bulanList()[(int) date('n')] . ' ' . date('Y');
       <div class="kop"><img src="assets/img/logo.png" alt="">
         <div>
           <h2>MA GHOYATUL JIHAD KARAWANG</h2>
-          <div style="font-size:11px">Sistem Informasi Madrasah Pintar, Lengkap, dan Efektif</div>
         </div>
       </div>
       <h3 class="jd">LAPORAN HASIL BELAJAR (RAPOR)</h3>
