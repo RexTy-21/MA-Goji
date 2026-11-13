@@ -28,7 +28,7 @@ function inisial($nama) {
     return mb_strtoupper($s);
 }
 ?>
-?><!doctype html>
+<!doctype html>
 <html lang="id"><head><meta charset="utf-8"><title><?= e($judul) ?> - MA Ghoyatul Jihad</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
@@ -91,7 +91,7 @@ function inisial($nama) {
     <div class="l2"><?= e($it['l2']) ?></div>
     <div class="l3"><?= e($it['l3']) ?></div>
     <div class="qrwrap"><div class="qr" id="qr<?= $i ?>" data-text="<?= e($it['qr']) ?>"></div></div>
-    <div class="ft">Scan QR untuk presensi</div>
+    <div class="ft"></div>
   </div>
 <?php endforeach; ?>
 </div>

@@ -66,7 +66,10 @@ include "header.php";
           <td><?= e($r['nis']) ?></td><td><?= e($r['nisn']) ?></td><td><b><?= e($r['nama']) ?></b></td><td><?= e($r['jenis_kelamin']) ?></td><td><?= e($r['kelas']) ?></td>
           <td><?= e($r['nama_wali']) ?></td><td><?= e($r['no_hp_wali']) ?></td>
           <td><span class="label label-<?= $on ? 'success' : 'default' ?>"><?= e($r['status']) ?></span></td>
-          <td><button type="button" class="btn btn-info btn-xs btn-card" data-nama="<?= e($r['nama']) ?>" data-sub="Kelas <?= e($r['kelas']) ?>" data-info="NIS: <?= e($r['nis']) ?>" data-qr="SISWA:<?= e($r['nis']) ?>"><i class="fa fa-id-card-o"></i></button></td>
+          <td style="white-space:nowrap">
+            <button type="button" class="btn btn-info btn-xs btn-card" title="Lihat kartu" data-nama="<?= e($r['nama']) ?>" data-sub="Kelas <?= e($r['kelas']) ?>" data-info="NIS: <?= e($r['nis']) ?>" data-qr="SISWA:<?= e($r['nis']) ?>"><i class="fa fa-id-card-o"></i></button>
+            <a href="?page=Cetak-Kartu&tipe=siswa&id=<?= (int)$r['id'] ?>" target="_blank" class="btn btn-success btn-xs" title="Cetak kartu"><i class="fa fa-print"></i></a>
+          </td>
           <?php if (canEdit()): ?><td><button type="button" class="btn btn-warning btn-xs btn-edit" data-row="<?= e(json_encode($r)) ?>">Edit</button></td><?php endif; ?>
         </tr>
       <?php endforeach; ?>

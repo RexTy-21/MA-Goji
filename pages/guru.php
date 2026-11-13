@@ -60,7 +60,10 @@ include "header.php";
           <td><?= e($r['nip']) ?></td><td><b><?= e($r['nama']) ?></b></td><td><?= e($r['jenis_kelamin']) ?></td><td><?= e($r['mapel']) ?></td><td><?= e($r['jabatan']) ?></td>
           <td><?= e($r['status_kepegawaian']) ?></td><td><?= e($r['no_hp']) ?></td>
           <td><span class="label label-<?= $on ? 'success' : 'danger' ?>"><?= e($r['status']) ?></span></td>
-          <td><button type="button" class="btn btn-info btn-xs btn-card" data-nama="<?= e($r['nama']) ?>" data-sub="<?= e($r['jabatan'] ?: $r['mapel']) ?>" data-info="NIP: <?= e($r['nip']) ?>" data-qr="GURU:<?= e($r['nip']) ?>"><i class="fa fa-id-card-o"></i></button></td>
+          <td style="white-space:nowrap">
+            <button type="button" class="btn btn-info btn-xs btn-card" title="Lihat kartu" data-nama="<?= e($r['nama']) ?>" data-sub="<?= e($r['jabatan'] ?: $r['mapel']) ?>" data-info="NIP: <?= e($r['nip']) ?>" data-qr="GURU:<?= e($r['nip']) ?>"><i class="fa fa-id-card-o"></i></button>
+            <a href="?page=Cetak-Kartu&tipe=guru&id=<?= (int)$r['id'] ?>" target="_blank" class="btn btn-success btn-xs" title="Cetak kartu"><i class="fa fa-print"></i></a>
+          </td>
           <?php if (canEdit()): ?><td><button type="button" class="btn btn-warning btn-xs btn-edit" data-row="<?= e(json_encode($r)) ?>">Edit</button></td><?php endif; ?>
         </tr>
       <?php endforeach; ?>
