@@ -11,11 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && canEdit()) {
     if ($act === 'add' && $f('nip') !== '' && $f('nama') !== '') {
         $ok = qrun($db, "INSERT INTO guru (nip, nama, jenis_kelamin, mapel, jabatan, status_kepegawaian, no_hp, email) VALUES (?,?,?,?,?,?,?,?)",
             'ssssssss', [$f('nip'), $f('nama'), $jk, $f('mapel'), $f('jabatan'), $sk, $f('no_hp'), $f('email')]);
+        if ($ok && ($nf = uploadFoto('foto', 'guru'))) qrun($db, "UPDATE guru SET foto=? WHERE nip=?", 'ss', [$nf, $f('nip')]);
         $msg = $ok ? 'Guru ditambahkan.' : 'Gagal: NIP sudah dipakai.';
     } elseif ($act === 'edit' && (int)$f('id') > 0) {
         $st = in_array($f('status'), ['Active', 'NonActive'], true) ? $f('status') : 'Active';
         qrun($db, "UPDATE guru SET nip=?, nama=?, jenis_kelamin=?, mapel=?, jabatan=?, status_kepegawaian=?, no_hp=?, email=?, status=? WHERE id=?",
             'sssssssssi', [$f('nip'), $f('nama'), $jk, $f('mapel'), $f('jabatan'), $sk, $f('no_hp'), $f('email'), $st, (int)$f('id')]);
+        if ($nf = uploadFoto('foto', 'guru')) {
+            $old = qall($db, "SELECT foto FROM guru WHERE id=?", 'i', [(int)$f('id')])[0]['foto'] ?? null;
+            qrun($db, "UPDATE guru SET foto=? WHERE id=?", 'si', [$nf, (int)$f('id')]);
+            if ($old) @unlink('uploads/foto/' . basename($old));
+        }
         $msg = 'Data guru disimpan.';
     }
     header('Location: ?page=Data-Guru&msg=' . urlencode($msg)); exit;
@@ -46,7 +52,11 @@ include "header.php";
       <tbody>
       <?php foreach ($rows as $i => $r): $on = $r['status'] === 'Active'; ?>
         <tr><td><?= $i + 1 ?></td>
-          <td><span style="display:inline-flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;background:<?= avatarColor($r['nip']) ?>"><?= e(initials($r['nama'])) ?></span></td>
+          <td><?php if (!empty($r['foto'])): ?>
+            <img src="uploads/foto/<?= e($r['foto']) ?>" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover">
+          <?php else: ?>
+            <span style="display:inline-flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;background:<?= avatarColor($r['nip']) ?>"><?= e(initials($r['nama'])) ?></span>
+          <?php endif; ?></td>
           <td><?= e($r['nip']) ?></td><td><b><?= e($r['nama']) ?></b></td><td><?= e($r['jenis_kelamin']) ?></td><td><?= e($r['mapel']) ?></td><td><?= e($r['jabatan']) ?></td>
           <td><?= e($r['status_kepegawaian']) ?></td><td><?= e($r['no_hp']) ?></td>
           <td><span class="label label-<?= $on ? 'success' : 'danger' ?>"><?= e($r['status']) ?></span></td>
@@ -69,15 +79,19 @@ $formFields = function ($p) use ($STATUS_KEP) { ?>
     <div class="col-sm-6 form-group"><label>Status Kepegawaian</label><select class="form-control" name="status_kepegawaian" id="<?= $p ?>status_kepegawaian"><?php foreach ($STATUS_KEP as $s) echo '<option>' . e($s) . '</option>'; ?></select></div>
     <div class="col-sm-6 form-group"><label>No. HP</label><input class="form-control" name="no_hp" id="<?= $p ?>no_hp"></div>
     <div class="col-sm-6 form-group"><label>Email</label><input class="form-control" name="email" id="<?= $p ?>email"></div>
+    <div class="col-sm-12 form-group"><label>Foto Profil</label><br>
+      <img id="<?= $p ?>prev" src="" alt="" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:6px">
+      <input type="file" name="foto" id="<?= $p ?>fotofile" accept="image/jpeg,image/png,image/webp" class="form-control">
+      <small class="text-muted">JPG/PNG/WEBP, maks 2 MB. Kosongkan jika tidak ingin mengganti.</small></div>
   </div>
 <?php };
 if (canEdit()): ?>
-<div class="modal fade" id="mdlAdd" tabindex="-1"><div class="modal-dialog modal-lg"><form class="modal-content" method="POST">
+<div class="modal fade" id="mdlAdd" tabindex="-1"><div class="modal-dialog modal-lg"><form class="modal-content" method="POST" enctype="multipart/form-data">
   <div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Tambah Guru</h4></div>
   <div class="modal-body"><input type="hidden" name="act" value="add"><?php $formFields('a_'); ?></div>
   <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Batal</button><button class="btn btn-primary">Simpan</button></div>
 </form></div></div>
-<div class="modal fade" id="mdlEdit" tabindex="-1"><div class="modal-dialog modal-lg"><form class="modal-content" method="POST">
+<div class="modal fade" id="mdlEdit" tabindex="-1"><div class="modal-dialog modal-lg"><form class="modal-content" method="POST" enctype="multipart/form-data">
   <div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Edit Guru</h4></div>
   <div class="modal-body"><input type="hidden" name="act" value="edit"><input type="hidden" name="id" id="e_id"><?php $formFields('e_'); ?>
     <div class="form-group"><label>Status</label><select class="form-control" name="status" id="e_status"><option>Active</option><option>NonActive</option></select></div></div>
@@ -92,7 +106,13 @@ $(function () {
   $(document).on('click', '.btn-edit', function () {
     var d = $(this).data('row');
     $.each(d, function (k, v) { $('#e_' + k).val(v); });
+    $('#e_fotofile').val('');
+    $('#e_prev').attr('src', d.foto ? 'uploads/foto/' + d.foto : '').toggle(!!d.foto);
     $('#mdlEdit').modal('show');
+  });
+  $(document).on('change', 'input[type=file][name=foto]', function () {
+    var p = $('#' + this.id.replace('fotofile', 'prev'));
+    if (this.files[0]) p.attr('src', URL.createObjectURL(this.files[0])).show();
   });
 });
 </script>

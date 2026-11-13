@@ -21,6 +21,21 @@ function qrun($db, $sql, $types = '', $p = []) {
     if ($types) $st->bind_param($types, ...$p);
     return $st->execute();
 }
+
+// Simpan foto upload ke uploads/foto/. Return nama file, atau null jika tidak ada/tidak valid.
+function uploadFoto(string $field, string $prefix): ?string {
+    if (empty($_FILES[$field]) || $_FILES[$field]['error'] !== UPLOAD_ERR_OK) return null;
+    $f = $_FILES[$field];
+    if ($f['size'] > 2 * 1024 * 1024) return null;                       // maks 2 MB
+    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($f['tmp_name']);
+    $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'][$mime] ?? null;
+    if (!$ext) return null;                                              // hanya gambar
+    $dir = 'uploads/foto/';
+    if (!is_dir($dir)) mkdir($dir, 0755, true);
+    $name = $prefix . '_' . bin2hex(random_bytes(6)) . '.' . $ext;
+    return move_uploaded_file($f['tmp_name'], $dir . $name) ? $name : null;
+}
+
 function bulanList() { return [1=>'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']; }
 
 function taAktif($db) { return qone($db, "SELECT * FROM tahun_ajaran WHERE aktif = 1 ORDER BY id DESC LIMIT 1"); }
