@@ -19,7 +19,7 @@ function accessRules() {
 // Daftar menu (satu sumber untuk sidebar dan layar Master Menu): [judul, ikon, halaman|null, [submenu: [judul, halaman]]|null]
 function menuRegistry() {
     return [
-        ['Profil Madrasah', 'fa-university', 'Dashboard', null],
+        ['Beranda', 'fa-university', 'Dashboard', null],
         ['Akademik', 'fa-graduation-cap', null, [['Data Siswa', 'Data-Siswa'], ['Data Guru', 'Data-Guru'], ['Data Kelas', 'Data-Kelas'], ['Mata Pelajaran', 'Mata-Pelajaran'], ['Jadwal Pelajaran', 'Jadwal'], ['Tahun Ajaran', 'Tahun-Ajaran'], ['Kenaikan Kelas', 'Kenaikan-Kelas']]],
         ['Absensi', 'fa-qrcode', null, [['Scan Absen', 'Absen-Scan'], ['Absensi Siswa', 'Absen-Siswa'], ['Absensi Guru', 'Absen-Guru']]],
         ['Penilaian', 'fa-pencil-square-o', null, [['Input Nilai', 'Input-Nilai'], ['Rapor', 'Rapor']]],
