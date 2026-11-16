@@ -202,8 +202,7 @@ ma-goji/
 │       ├── app.js                # Interaktivitas UI, sidebar, datatables, sweetalert
 │       └── card.js               # Handler pratinjau kartu pelajar
 ├── database/
-│   ├── schema.sql                # Skema tabel dasar (database utama)
-│   └── seed.sql                  # Data seeder awal (pengguna & sampel siswa/guru)
+│   └── goji_db.sql               # Database Utama
 │            
 ├── library/
 │   ├── access.php                # Logic otorisasi peran & pemeriksaan Master Menu
