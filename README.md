@@ -159,8 +159,7 @@ Buka antarmuka database Anda (misalnya **phpMyAdmin** di `http://localhost/phpmy
 
 1. Buat database baru bernama **`goji_db`** (atau sesuaikan dengan konfigurasi Anda).
 2. Jalankan/import skrip SQL berikut secara berurutan:
-   * 📄 `database/schema.sql` *(Database utama)*
-   * 📄 `database/seed.sql` *(Data master awal, siswa, guru, kelas, & akun demo)*
+   * 📄 `database/goji.db.sql` *(Database utama)*
 
 
 > **Tips:** Jika menggunakan database bernama `goji_db`, saat mengimpor `schema.sql` dan `seed.sql`, pastikan Anda mengimpor langsung ke database `goji_db` atau sesuaikan baris `USE simple_sekolah;` pada baris atas file tersebut.
