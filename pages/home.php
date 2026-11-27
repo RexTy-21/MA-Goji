@@ -506,7 +506,7 @@ include "header.php";
       <div class="sc-stat-ico"><i class="fa fa-id-badge"></i></div>
     </div>
     <div class="sc-stat is-blue">
-      <div class="sc-stat-info"><b><?= $jmlKelas ?></b><span>Rombongan Belajar</span></div>
+      <div class="sc-stat-info"><b><?= $jmlKelas ?></b><span>Jumlah Kelas</span></div>
       <div class="sc-stat-ico"><i class="fa fa-building-o"></i></div>
     </div>
     <div class="sc-stat is-emerald">

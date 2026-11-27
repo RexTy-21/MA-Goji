@@ -67,15 +67,16 @@ include "header.php";
   <div class="page-title"><div class="title_left"><h3>Scan Absen <small>QR Code Siswa &amp; Guru</small></h3></div></div>
   <div class="clearfix"></div>
   <div class="row">
-    <div class="col-md-6"><div class="x_panel"><div class="x_title"><h2>Kamera</h2><div class="clearfix"></div></div><div class="x_content">
-      <div id="reader" style="width:100%"></div>
-      <p class="text-muted" style="margin-top:8px">Arahkan QR di kartu ke kamera. Kamera hanya jalan di <code>http://localhost/...</code> atau HTTPS. Batas masuk: <b>07:00</b>.</p>
+    <div class="col-md-6"><div class="x_panel"><div class="x_title"><h2><i class="fa fa-camera"></i> Kamera</h2><span class="label label-success">Aktif Otomatis</span></div><div class="x_content">
+      <div id="reader" style="width:100%;border-radius:12px;overflow:hidden;border:1px solid #d6eadc;background:#0b1f13"></div>
+      <p class="text-muted" style="margin-top:10px;font-size:12.5px"><i class="fa fa-info-circle"></i> Arahkan QR di kartu ke area kamera. Kamera hanya jalan di <code>http://localhost/...</code> atau HTTPS. Batas masuk: <b>07:00</b>.</p>
       <hr><label>Atau ketik NIS / NIP (cadangan):</label>
-      <div class="input-group"><input id="manual" class="form-control" placeholder="mis. 2526001"><span class="input-group-btn"><button id="btnManual" class="btn btn-primary">Absen</button></span></div>
+      <div class="input-group"><input id="manual" class="form-control" placeholder="mis. 2526001"><span class="input-group-btn"><button id="btnManual" class="btn btn-primary"><i class="fa fa-check"></i> Absen</button></span></div>
     </div></div></div>
-    <div class="col-md-6"><div class="x_panel"><div class="x_title"><h2>Hasil Scan</h2><div class="clearfix"></div></div><div class="x_content">
-      <div id="hasil" class="well" style="font-size:16px;min-height:120px">Menunggu scan...</div>
-      <h4>Riwayat sesi ini</h4><ul id="riwayat" class="list-unstyled"></ul>
+    <div class="col-md-6"><div class="x_panel"><div class="x_title"><h2><i class="fa fa-check-circle-o"></i> Hasil Scan</h2><div class="clearfix"></div></div><div class="x_content">
+      <div id="hasil" class="well" style="font-size:15.5px;min-height:110px;display:flex;flex-direction:column;justify-content:center">Menunggu scan...</div>
+      <h4 style="font-size:14px;font-weight:700;color:#0d6b33;margin:16px 0 10px"><i class="fa fa-history"></i> Riwayat sesi ini</h4>
+      <ul id="riwayat" class="list-unstyled" style="display:flex;flex-direction:column;gap:6px;margin:0"></ul>
     </div></div></div>
   </div>
 </div>
