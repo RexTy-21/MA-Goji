@@ -84,10 +84,38 @@ include "header.php";
 <script>
 $(function () {
   var last = '', lastAt = 0;
+  var audioCtx = null;
+  function getAudio() {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audioCtx) audioCtx = new AC();
+    if (audioCtx.state === 'suspended') audioCtx.resume().catch(function () {});
+    return audioCtx;
+  }
+  $(document).one('click keydown touchstart', function () { getAudio(); });
+  function playTing() {
+    var ctx = getAudio();
+    if (!ctx) return;
+    var now = ctx.currentTime;
+    [1318.5, 1975.5].forEach(function (freq, idx) {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.exponentialRampToValueAtTime(idx === 0 ? 0.28 : 0.14, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.65);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.68);
+    });
+  }
   function esc(s) { return $('<i>').text(s == null ? '' : s).html(); }
   function kirim(code) {
     $.post('?page=Absen-Scan&ajax=1', { code: code }, function (r) {
       if (r.ok) {
+        playTing();
         var w = r.tipe === 'MASUK' ? (r.status === 'Terlambat' ? '#f39c12' : '#16a34a') : '#0a8cff';
         $('#hasil').css('border-left', '6px solid ' + w).html('<b style="font-size:20px">' + esc(r.tipe) + ' - ' + esc(r.nama) + '</b><br>' + esc(r.ket) + '<br>Jam ' + esc(r.jam) + ' &middot; ' + esc(r.status));
         $('#riwayat').prepend('<li>' + esc(r.jam) + ' &middot; ' + esc(r.nama) + ' (' + esc(r.tipe) + ')</li>');
@@ -98,7 +126,7 @@ $(function () {
   $('#manual').on('keydown', function (e) { if (e.key === 'Enter') $('#btnManual').click(); });
   if (window.Html5Qrcode) {
     var sc = new Html5Qrcode('reader');
-    sc.start({ facingMode: 'environment' }, { fps: 10, qrbox: 240 }, function (txt) {
+    sc.start({ facingMode: 'environment' }, { fps: 15 }, function (txt) {
       var now = Date.now(); if (txt === last && now - lastAt < 4000) return; last = txt; lastAt = now; kirim(txt);
     }).catch(function () { $('#reader').html('<div class="alert alert-warning">Kamera tidak tersedia. Pakai input NIS/NIP di bawah, atau buka lewat http://localhost.</div>'); });
   }
