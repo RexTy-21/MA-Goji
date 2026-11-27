@@ -264,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
       <p class="err" role="alert"><?= htmlspecialchars($err) ?></p>
-      <button type="submit">Masuk ke Sistem</button>
+      <button type="submit">Login</button>
     </form>
     <p class="note">Akun demo: <b>admin</b> / <b>demo1234</b> &middot; Semua data adalah dummy.</p>
   </div>
