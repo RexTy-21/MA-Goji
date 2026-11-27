@@ -84,13 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     letter-spacing: .04em;
     margin-bottom: 10px;
   }
-  .school-pill::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #16a34a;
-  }
+
   .logo-wrap {
     width: 92px;
     height: 92px;
